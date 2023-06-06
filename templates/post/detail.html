@@ -1,0 +1,104 @@
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block body %}#}
+{##}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-md-6 col-md-offset-3">#}
+{#                <div class="thumbnail">#}
+{#                    {% if post.image %}#}
+{#                        <img src="{{ post.image.url }}" class="img-responsive" >#}
+{#                    {% endif %}#}
+{#                    <div class="caption">#}
+{#                        <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> <small>{{ post.publishing_date }}</small></h3>#}
+{#                        <h4>Yazar: {{ post.user.get_full_name }}</h4>#}
+{#                        <p>{{ post.content|safe|linebreaks }}</p>#}
+{#                        <p>#}
+{##}
+{#                            {% if request.user.is_authenticated %}#}
+{#                                <a href="{{ post.get_update_url }}" class="btn btn-default" role="button">Güncelle</a>#}
+{#                                <a href="{{ post.get_delete_url }}" class="btn btn-danger" role="button">Sil</a>#}
+{#                            {% endif %}#}
+{#                        </p>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <br><br><hr>#}
+{##}
+
+
+
+{##}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{##}
+
+
+
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+
+<!--detail sayfası  -->
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                 <div class="table-responsive">
+                                <table class="table table-centered  table-nowrap mb-0">
+                                    <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">Dosya İsmi</th>
+                                        <th scope="col">Yükleme Tarihi</th>
+                                        <th scope="col">Yükleyen</th>
+
+                                        <th scope="col"> Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>{% for post in posts %}
+                                    <tr>
+                                        <td>
+                                            {% if post.image %}
+                                            <img src="{{ post.image.url }}" height="30" alt="dosya" class="me-2">
+                                            <a href="{{ post.image.url }}" class="text-dark">{{ post.title }}</a>
+                                            {% endif %}
+                                        </td>
+                                        <td class="font-13">{{ post.publishing_date }}</td>
+                                        <td>{{ request.user.username }}</td>
+
+                                        <td>
+                                             <ul class="list-inline table-action m-0">
+                                                <li class="list-inline-item">
+                                                    <a href="{{ post.get_update_url }}" class="action-icon px-1"> <i
+                                                            class="mdi mdi-pencil"></i></a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="{{ post.get_delete_url }}" class="action-icon px-1"> <i
+                                                            class="mdi mdi-delete"></i></a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+
+
+                                    </tbody>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
